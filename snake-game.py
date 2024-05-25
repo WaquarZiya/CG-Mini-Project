@@ -1,4 +1,4 @@
-import pygame
+import pygame    #pip install turtle
 import sys
 import os
 import random 
