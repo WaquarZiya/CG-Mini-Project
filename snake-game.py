@@ -1,6 +1,5 @@
-import pygame    #pip install turtle
+import pygame
 import sys
-import os
 import random 
 import math
 
@@ -215,12 +214,16 @@ def getKey():
 
 
 # Game End message
-def endGame():
+def endGame(score, gameTime):
     screen.fill("black")
     message = game_over_font.render("GAME OVER",1,pygame.Color("white"))
-    message_play_again = play_again_font.render("Play Again? (Y/N)",1,pygame.Color("red"))
     screen.blit(message,(320,240))
+    message_play_again = play_again_font.render("Play Again? (Y/N)",1,pygame.Color("red"))
     screen.blit(message_play_again,(320+12,240+40))
+    score_message = play_again_font.render(f"Score: {score}",1,pygame.Color("green"))
+    screen.blit(score_message,(320+55,240+80))
+    time_message = play_again_font.render(f"Time: {gameTime/1000}",1,pygame.Color("green"))
+    screen.blit(time_message,(320+40,240+100))
 
     pygame.display.flip()
     pygame.display.update()
@@ -313,7 +316,8 @@ def main():
         # to check collision
         checkLimits(mySnake)
         if(mySnake.checkCrashing() == True):
-            endGame()
+            endGame(score, gameTime)
+            break
 
         # Game winning criteria
         for myApple in apples:
